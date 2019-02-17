@@ -22,19 +22,20 @@ defjson = defreq.json()
 stajson = stareq.json()
 
 separator = " "
-name = separator.join(sys.argv[1:])
 
-for i in attjson:
-    if i["title"] == name:
-        attack=i["field_base_attack"]
-        break
-for i in defjson:
-    if i["title"] == name:
-        defense=i["field_base_defense"]
-        break
-for i in stajson:
-    if i["title"] == name:
-        stamina=i["field_base_stamina"]
-        break
+def getstatsbyname():
+    name=input()
+    for i in attjson:
+        if i["title"] == name:
+            attack=int(i["field_base_attack"])
+            break
+    for i in defjson:
+        if i["title"] == name:
+            defense=int(i["field_base_defense"])
+            break
+    for i in stajson:
+        if i["title"] == name:
+            stamina=int(i["field_base_stamina"])
+            break
+    return {"name":name,"attack":attack,"defense":defense,"stamina":stamina}
 
-print("{0},{1},{2}".format(attack,defense,stamina))
