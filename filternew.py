@@ -51,8 +51,7 @@ def hpcpstring(hpcpdict):
     nothpcp = ""
     for hp in hpcpdict:
         nothpcp += "!" + hpstring(hp)
-        for cp in hpcpdict[hp]:
-            nothpcp += "," + cpstring(cp)
+        nothpcp += "," + cprangestring(gethpranges(hpcpdict[hp]))
         nothpcp += "&"
     return nothpcp
 
@@ -63,7 +62,16 @@ def hprangestring(hpdict):
             hprstring += hpstring(hp) + "-" + str(hpdict[hp]) + ","
         else:
             hprstring += hpstring(hp) + ","
-    return hprstring
+    return hprstring[:-1]
+
+def cprangestring(cpdict):
+    cprstring = ""
+    for cp in cpdict:
+        if cp < cpdict[cp]:
+            cprstring += cpstring(cp) + "-" + str(cpdict[cp]) + ","
+        else:
+            cprstring += cpstring(cp) + ","
+    return cprstring[:-1]
 
 pokestats=pogostat.getstatsbyname()
 
@@ -72,7 +80,7 @@ baseattack=pokestats["attack"]
 basedefence=pokestats["defense"]
 basestamina=pokestats["stamina"]
 name=pokestats["name"]
-
+dexid=str(pokestats["dexid"])
 
 minattackiv=int(input())
 mindefenceiv=int(input())
@@ -103,4 +111,4 @@ for cpm in allcpm:
 #print("cp{0}".format(cp),end=",")
 #print(allcp[-1])
 #print(",".join(map(cpstring,allcp)))
-print(hpcpstring(hpcp) + hprangestring(gethpranges(hpcp.keys())))
+print(dexid + "&" + hpcpstring(hpcp) + hprangestring(gethpranges(hpcp.keys())))
