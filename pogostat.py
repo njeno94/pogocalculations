@@ -27,8 +27,7 @@ dexjson = dexreq.json()
 
 separator = " "
 
-def getstatsbyname():
-    name=input()
+def getstatsbyname(name):
     for i in attjson:
         if i["title"] == name:
             attack=int(i["field_base_attack"])
