@@ -13,7 +13,7 @@ for i in jsonlinks:
         defenseurl = i["url"]
     if i["title"] == "stamina-PoGO":
         staminaurl = i["url"]
-    if i["title"] == "pokemon-search-PoGO":
+    if i["title"] == "iv-en-PoGO":
         pokedexurl = i["url"]	
 attreq = requests.get(attackurl)
 defreq = requests.get(defenseurl)
@@ -42,7 +42,7 @@ def getstatsbyname():
             stamina=int(i["field_base_stamina"])
             break
     for i in dexjson:
-        if i["text"] == name:
-            dexid=int(i["path"].split("/")[2])
+        if i["name"] == name:
+            dexid=int(i["number"])
     return {"name":name,"attack":attack,"defense":defense,"stamina":stamina, "dexid":dexid}
 
